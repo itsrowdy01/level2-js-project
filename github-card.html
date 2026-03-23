@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GitHub Card</title>
+</head>
+
+<body style="background-color:#212121; display:flex; justify-content:center; align-items:center; height:100vh; font-family:sans-serif;">
+
+<script>
+const requestUrl = 'https://api.github.com/users/hiteshchoudhary'
+const xhr = new XMLHttpRequest()
+
+xhr.open('GET', requestUrl)
+
+xhr.onreadystatechange = function () {
+
+    if (xhr.readyState === 4) {
+        const data = JSON.parse(this.responseText)
+
+        // 🔥 Create Card Container
+        const card = document.createElement('div')
+        card.style.width = '300px'
+        card.style.background = '#2c2c2c'
+        card.style.borderRadius = '15px'
+        card.style.padding = '20px'
+        card.style.textAlign = 'center'
+        card.style.color = '#fff'
+        card.style.boxShadow = '0 10px 25px rgba(0,0,0,0.5)'
+
+        // 🖼️ Profile Image
+        const img = document.createElement('img')
+        img.src = data.avatar_url
+        img.style.width = '120px'
+        img.style.height = '120px'
+        img.style.borderRadius = '50%'
+        img.style.marginBottom = '15px'
+
+        // 👤 Name
+        const name = document.createElement('h2')
+        name.innerText = data.name
+
+        // 👥 Followers
+        const followers = document.createElement('p')
+        followers.innerText = `Followers: ${data.followers}`
+        followers.style.marginTop = '10px'
+        followers.style.color = '#aaa'
+
+        // 🚀 Append Elements
+        card.appendChild(img)
+        card.appendChild(name)
+        card.appendChild(followers)
+
+        document.body.appendChild(card)
+    }
+}
+
+xhr.send()
+</script>
+
+</body>
+</html>
